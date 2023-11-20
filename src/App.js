@@ -1,23 +1,31 @@
-import logo from './logo.svg';
+import React, { useState } from 'react'
 import './App.css';
+import Form from './components/Form/Form';
+import ProfilePanel from './components/Profile_Panel/ProfilePanel';
 
 function App() {
+  const [data, setData] = useState({})
+  const [isSubmited, setIsSubmited] = useState(false)
+
+  function handleSubmit(event, name, email, phone) {
+    event.preventDefault()
+    if (name.trim() && email.trim() && phone.trim()) {
+      setData({
+        name: name,
+        email: email,
+        phone: phone,
+      })
+      console.log(data);
+      setIsSubmited(true)
+    } else {
+      alert('Введите корректные данные')
+    }
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='conatiner'>
+      <Form onSubmit={handleSubmit}/>
+      {isSubmited && <ProfilePanel data={data}/>}
     </div>
   );
 }
