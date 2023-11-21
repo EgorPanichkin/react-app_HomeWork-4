@@ -1,21 +1,16 @@
 import React, { useState } from 'react'
 import './App.css';
-import Form from './components/Form/Form';
 import ProfilePanel from './components/Profile_Panel/ProfilePanel';
 
 function App() {
-  const [data, setData] = useState({})
   const [isSubmited, setIsSubmited] = useState(false)
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
 
-  function handleSubmit(event, name, email, phone) {
+  function handleSubmit(event) {
     event.preventDefault()
     if (name.trim() && email.trim() && phone.trim()) {
-      setData({
-        name: name,
-        email: email,
-        phone: phone,
-      })
-      console.log(data);
       setIsSubmited(true)
     } else {
       alert('Введите корректные данные')
@@ -24,8 +19,13 @@ function App() {
 
   return (
     <div className='conatiner'>
-      <Form onSubmit={handleSubmit}/>
-      {isSubmited && <ProfilePanel data={data}/>}
+      <form >
+        <input value={name} type='text' onChange={e => setName(e.target.value)} placeholder='Enter your name'/>
+        <input value={email} type='text' onChange={e => setEmail(e.target.value)} placeholder='Enter your e-mail'/>
+        <input value={phone} type='text' onChange={e => setPhone(e.target.value)} placeholder='Enter your phone-number'/>
+        <button className='buttonSubmit' onClick={e => handleSubmit(e)}>Register</button>
+      </form>
+      {isSubmited && <ProfilePanel name={name} email={email} phone={phone}/>}
     </div>
   );
 }

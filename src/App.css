@@ -1,0 +1,22 @@
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  padding: 20px;
+  gap: 20px;
+  width: 250px;
+  height: 300px;
+  margin: 20px auto;
+  border: 2px solid black;
+}
+
+input {
+  height: 25px;
+  padding-left: 10px;
+}
+
+.buttonSubmit {
+  width: 100px;
+  margin: 0 auto;
+  display: block;
+}
